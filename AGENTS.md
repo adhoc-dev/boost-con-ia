@@ -1,112 +1,85 @@
 # AGENTS.md
 
+Guía operativa para Codex en este repo. Configuración del MCP y del entorno: ver `README.md`.
+
 ## Contexto
 
-Este repositorio es para una capacitación de Boost con IA.
+Capacitación de Boost con IA. El flujo simula la colaboración entre PO y devs apoyada por agentes:
 
-El objetivo es que los agentes trabajen usando el MCP de Tuqui para consultar datos de la base de Odoo de Adhoc y producir análisis útiles, concretos y accionables para el equipo.
+1. **PO**: usa Tuqui MCP para analizar tickets de los últimos 3 meses sobre los productos `adhoc.product` del equipo y redacta specs **funcionales** (sin referencias a código) que apunten a reducir la recurrencia de tickets.
+2. **PO**: sube esas specs a una rama y las entrega a los devs.
+3. **Devs**: se pasan a la rama, abren el entorno de desarrollo y, con la spec funcional + contexto del código, redactan una spec **técnica**.
+4. **Devs**: implementan la spec técnica y abren el PR.
 
-No asumir que los nombres técnicos de todos los modelos o campos son obvios. Validarlos con las herramientas de Tuqui antes de consultar.
+No asumir nombres técnicos de modelos o campos: validarlos con Tuqui antes de consultar. No escribir en Odoo.
 
-## Objetivo del ejercicio
+## Skills del repo
 
-Tomar como foco los productos `adhoc.product` del equipo en el que trabaja la persona usuaria, analizar los tickets de los últimos 3 meses y producir:
+Las skills viven en `.agents/skills/`. Usarlas en lugar de inventar formatos.
 
-1. Un informe breve con hallazgos.
-2. Tres especificaciones de mejora para nuestros módulos, orientadas a reducir recurrencia de tickets y hacer el mantenimiento más sustentable.
-3. Un commit por cada especificación.
+- `git-branch`: nombres de rama estilo ADHOC (`<version>-<h|t>-<slug>-<nickname>`). Usar al crear ramas para specs o PRs.
+- `git-commit`: subjects de commit estilo ADHOC/Odoo (`[ADD|IMP|REF|I18N|FIX|DEL] module_name: summary`). Usar al proponer o redactar commits.
+- `skill-creator`: para crear o evaluar nuevas skills si surge la necesidad.
 
-Si no hay implementación real para commitear en este repo, al menos generar un mensaje de commit propuesto por cada spec usando la skill de commits.
+## Modo PO (análisis + specs funcionales)
 
-## Forma de trabajo esperada
+### Forma de trabajo con Tuqui MCP
 
-1. Empezar siempre cargando contexto con `tuqui_context`.
-2. Descubrir los modelos relevantes antes de consultar datos.
+1. Empezar siempre con `tuqui_context`.
+2. Descubrir modelos relevantes con `odoo_schema_discover` (keywords: `product`, `adhoc.product`, `ticket`, `helpdesk`, `support`, `issue`).
 3. Validar campos con `odoo_fields_get` o `odoo_fields_batch` antes de armar dominios.
 4. Usar `odoo_read_group` para agregados, tendencias y top-N.
-5. Usar `odoo_search_read` sólo para muestras concretas o detalle puntual.
-6. Limitar siempre los resultados y mantener las consultas acotadas.
-7. No inventar datos. Si algo no aparece en Odoo, decirlo explícitamente.
+5. Usar `odoo_search_read` sólo para muestras o detalle puntual, con `limit` y lista explícita de campos.
+6. Si `has_more` es `true`, paginar con `next_offset`.
+7. No inventar datos: si algo no aparece en Odoo, decirlo explícitamente.
 
-## Alcance sugerido del análisis
+### Alcance del análisis
 
-Buscar y relacionar, como mínimo:
+Como mínimo cruzar:
 
-- Productos o módulos del equipo.
-- Tickets de soporte o helpdesk de los últimos 3 meses.
-- Volumen por producto.
-- Temas o categorías repetidas.
-- Clientes más afectados.
-- Tickets reabiertos, bloqueados o de resolución lenta, si esos datos existen.
+- productos o módulos del equipo;
+- tickets de soporte/helpdesk de los últimos 3 meses;
+- volumen por producto;
+- temas o categorías repetidas;
+- clientes más afectados;
+- tickets reabiertos, bloqueados o de resolución lenta (si hay datos).
 
-Si `adhoc.product` no fuera el nombre técnico exacto del modelo, usar `odoo_schema_discover` para encontrar el modelo correcto.
+### Informe
 
-## Flujo recomendado con Tuqui MCP
+Incluir período analizado, criterios de selección de productos y tickets, top problemas con evidencia numérica, oportunidades detectadas y las specs finales priorizadas.
 
-1. Ejecutar `tuqui_context`.
-2. Usar `odoo_schema_discover` con keywords como `product`, `adhoc.product`, `ticket`, `helpdesk`, `support` e `issue`.
-3. Validar los campos de fecha, producto, estado, equipo, categoría y cliente con `odoo_fields_get`.
-4. Armar dominios sólo después de confirmar los nombres reales de campos y valores de selección.
-5. Obtener agregados de los últimos 3 meses con `odoo_read_group`.
-6. Leer una muestra chica de tickets representativos con `odoo_search_read`.
-7. Redactar el informe con evidencia concreta.
-8. Proponer 3 specs priorizadas por impacto y factibilidad.
-9. Generar 1 commit por spec, o al menos 1 mensaje de commit por spec si no hay implementación.
-10. Para los commits o mensajes de commit, usar la skill `$git-commit` en lugar de definir reglas de formato en este archivo.
+### Specs funcionales (entregable PO)
 
-## Criterios para las 3 specs
+2 specs, sin referencias a código. Cada una con:
 
-Cada spec debe:
+- problema actual y evidencia (volumen, ejemplos);
+- módulo o producto afectado;
+- cambio propuesto en términos de producto/proceso;
+- impacto esperado en recurrencia de tickets;
+- riesgo o tradeoff;
+- criterio de validación.
 
-- atacar una causa repetida de tickets;
-- reducir soporte manual, ambigüedad o errores operativos;
-- indicar módulo afectado;
-- indicar problema actual;
-- indicar cambio propuesto;
-- indicar impacto esperado;
-- indicar riesgo o tradeoff;
-- indicar cómo validar la mejora.
+Preferir mejoras que **prevengan** tickets sobre arreglos reactivos.
 
-Preferir mejoras de producto y proceso que prevengan tickets, no sólo arreglos reactivos.
+### Entrega al equipo de devs
 
-## Formato esperado del informe
+1. Crear rama con la skill `git-branch`.
+2. Commitear las specs con la skill `git-commit`.
+3. Pushear la rama y dejarla lista para los devs.
 
-Incluir:
+## Modo Dev (spec técnica + implementación)
 
-- período analizado;
-- criterios usados para identificar productos y tickets;
-- top problemas detectados;
-- evidencia resumida con números;
-- oportunidades de mejora;
-- 3 specs finales priorizadas.
+1. Checkout de la rama del PO con las specs funcionales.
+2. Levantar el entorno de desarrollo del módulo afectado.
+3. Leer la spec funcional y explorar el código para mapear puntos de cambio.
+4. Redactar una spec **técnica** por cada spec funcional: archivos/modelos a tocar, cambios concretos, migraciones o datos, tests, riesgos.
+5. Implementar.
+6. Para nombres de rama y commits, usar las skills `git-branch` y `git-commit`.
+7. Abrir uno o más PRs implementando las specs.
 
 ## Restricciones
 
-- No escribir en Odoo.
+- No escribir en Odoo desde Tuqui MCP.
 - No asumir acceso fuera de Tuqui MCP.
-- No usar consultas excesivamente amplias.
+- Mantener consultas acotadas (filtros estrechos, `limit`, campos explícitos).
 - No exponer credenciales ni copiar configuraciones sensibles al repo.
-
-## Cómo agregar Tuqui MCP a Codex
-
-Si Tuqui MCP no está configurado en Codex, preferir este comando:
-
-```bash
-codex mcp add tuqui --url https://tuqui.ai/mcp/adhoc
-```
-
-Alternativamente, agregar una entrada en `~/.codex/config.toml`:
-
-```toml
-[mcp_servers.tuqui]
-url = "https://tuqui.ai/mcp/adhoc"
-```
-
-Pasos:
-
-1. Ejecutar `codex mcp add tuqui --url https://tuqui.ai/mcp/adhoc`.
-2. Si se usa configuración manual, abrir `~/.codex/config.toml` y agregar el bloque de `mcp_servers.tuqui`.
-3. Reiniciar Codex.
-4. Verificar que las herramientas de Tuqui estén disponibles, por ejemplo intentando usar `tuqui_context`.
-
-Si ya existe una sección `mcp_servers.tuqui`, no duplicarla: revisar o actualizar su `url`.
