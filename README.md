@@ -41,6 +41,15 @@ Si todavía no tenés Codex instalado:
 npm install -g @openai/codex
 ```
 
+Alternativamente, se puede instalar Codex sin npm:
+
+```bash
+curl -fL -o codex.tar.gz https://github.com/openai/codex/releases/latest/download/codex-x86_64-unknown-linux-musl.tar.gz
+tar -xzf codex.tar.gz
+sudo install -m 0755 codex-x86_64-unknown-linux-musl /usr/local/bin/codex
+rm codex.tar.gz codex-x86_64-unknown-linux-musl
+```
+
 El login debe hacerse con la cuenta de ChatGPT compartida por el equipo (`team-*@adhoc.inc`), no con cuentas personales.
 
 ### Configurar el modelo
@@ -58,6 +67,12 @@ codex mcp add tuqui --url https://tuqui.ai/mcp/adhoc
 Esto abre directamente Tuqui en el navegador para autenticarse. Una vez completada la autenticación, se puede cerrar la pestaña y volver a la terminal.
 
 Una vez registrado, volver a entrar a Codex con `codex` y correr `/mcp`. Deberían aparecer las tools correspondientes (`tuqui_context`, `odoo_schema_discover`, `odoo_fields_get`, `odoo_read_group`, `odoo_search_read`, entre otras).
+
+Si en algún momento se cierra la sesión de Tuqui, volver a autenticar desde la terminal con:
+
+```bash
+codex mcp login tuqui
+```
 
 ## Enunciado
 
