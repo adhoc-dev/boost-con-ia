@@ -43,6 +43,10 @@ npm install -g @openai/codex
 
 El login debe hacerse con la cuenta de ChatGPT compartida por el equipo (`team-*@adhoc.inc`), no con cuentas personales.
 
+### Configurar el modelo
+
+Dentro de Codex, correr `/model` y elegir `gpt-5.5` con effort `medium`.
+
 ### Configurar Tuqui MCP
 
 El registro del MCP se hace **por fuera de Codex**, desde la terminal:
