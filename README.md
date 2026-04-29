@@ -6,14 +6,6 @@ Repositorio para una capacitación de Boost con IA orientada a trabajo asistido 
 
 El ejercicio consiste en analizar información de Odoo de Adhoc para detectar oportunidades de mejora en los productos del equipo y convertir ese análisis en propuestas accionables.
 
-El foco sugerido es:
-
-- identificar los productos `adhoc.product` del equipo;
-- analizar los tickets de los últimos 3 meses;
-- redactar un informe breve con hallazgos;
-- definir 3 especificaciones de mejora para reducir tickets;
-- generar 1 commit o mensaje de commit por cada spec.
-
 ## Herramientas esperadas
 
 - Codex
@@ -22,35 +14,24 @@ El foco sugerido es:
 
 ## Configurar Tuqui MCP en Codex
 
-La forma más simple es:
+Desde la terminal, ejecutar:
 
 ```bash
 codex mcp add tuqui --url https://tuqui.ai/mcp/adhoc
 ```
 
-Alternativamente, se puede agregar manualmente en `~/.codex/config.toml`:
+Luego volver a entrar a Codex y correr `/mcp`. Deberían aparecer las tools correspondientes (`tuqui_context`, `odoo_schema_discover`, `odoo_fields_get`, `odoo_read_group`, `odoo_search_read`, entre otras).
 
-```toml
-[mcp_servers.tuqui]
-url = "https://tuqui.ai/mcp/adhoc"
-```
+## Enunciado
 
-Luego reiniciar Codex y verificar que estén disponibles herramientas como `tuqui_context`, `odoo_schema_discover`, `odoo_fields_get`, `odoo_read_group` y `odoo_search_read`.
+- identificar los productos `adhoc.product` del equipo;
+- analizar los tickets de los últimos 3 meses;
+- redactar un informe breve con hallazgos;
+- definir 2 especificaciones de mejora para reducir tickets;
+- abrir uno o más PRs implementando las specs.
 
-## Estructura del repo
-
-- [AGENTS.md](/home/joa/enterprise/boost-con-ia/AGENTS.md): contexto operativo del ejercicio y lineamientos para agentes
-- [`.agents/`](/home/joa/enterprise/boost-con-ia/.agents): skills de proyecto disponibles en el repo
-- [`skills/git-commit-message/`](/home/joa/enterprise/boost-con-ia/skills/git-commit-message): fuente visible de la skill para redactar commits
-
-## Entregables esperados
+### Entregables esperados
 
 - 1 informe breve con evidencia y hallazgos
-- 3 specs priorizadas para bajar recurrencia de tickets
-- 3 commits o mensajes de commit asociados a esas specs
-
-## Notas
-
-- No asumir nombres técnicos de modelos o campos sin validarlos en Tuqui.
-- Preferir agregados con `odoo_read_group` y usar `odoo_search_read` sólo para detalle puntual.
-- No escribir en Odoo desde este ejercicio.
+- 2 specs priorizadas para bajar recurrencia de tickets
+- uno o más PRs implementando las specs
