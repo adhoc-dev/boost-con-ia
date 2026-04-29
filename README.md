@@ -24,14 +24,17 @@ Luego volver a entrar a Codex y correr `/mcp`. Deberían aparecer las tools corr
 
 ## Enunciado
 
-- identificar los productos `adhoc.product` del equipo;
-- analizar los tickets de los últimos 3 meses;
-- redactar un informe breve con hallazgos;
-- definir 2 especificaciones de mejora para reducir tickets;
-- abrir uno o más PRs implementando las specs.
+El flujo simula la colaboración entre PO y devs apoyada por agentes:
+
+1. **PO**: analiza los tickets de los últimos 3 meses sobre los productos `adhoc.product` del equipo vía Tuqui MCP, y redacta specs **funcionales** (sin referencias a código) que apunten a reducir la recurrencia de tickets.
+2. **PO**: sube esas specs a una rama y las entrega a los devs (usando Codex + skills).
+3. **Devs**: se pasan a la rama y, con la spec funcional, abren el entorno de desarrollo.
+4. **Devs**: con la spec funcional y el contexto del código, generan una spec **técnica** de implementación.
+5. **Devs**: implementan la spec técnica y abren el PR correspondiente.
 
 ### Entregables esperados
 
-- 1 informe breve con evidencia y hallazgos
-- 2 specs priorizadas para bajar recurrencia de tickets
+- 1 informe breve con evidencia y hallazgos del análisis de tickets
+- 2 specs funcionales priorizadas para bajar recurrencia de tickets
+- 2 specs técnicas derivadas de las funcionales
 - uno o más PRs implementando las specs
