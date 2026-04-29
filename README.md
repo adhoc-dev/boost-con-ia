@@ -51,6 +51,8 @@ El registro del MCP se hace **por fuera de Codex**, desde la terminal:
 codex mcp add tuqui --url https://tuqui.ai/mcp/adhoc
 ```
 
+Esto abre directamente Tuqui en el navegador para autenticarse. Una vez completada la autenticación, se puede cerrar la pestaña y volver a la terminal.
+
 Una vez registrado, volver a entrar a Codex con `codex` y correr `/mcp`. Deberían aparecer las tools correspondientes (`tuqui_context`, `odoo_schema_discover`, `odoo_fields_get`, `odoo_read_group`, `odoo_search_read`, entre otras).
 
 ## Enunciado
