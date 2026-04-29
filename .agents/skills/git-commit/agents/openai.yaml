@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Commit"
+  short_description: "Draft ADHOC-style git commit subjects"
+  default_prompt: "Use $git-commit to draft an ADHOC-style commit message from my current changes."

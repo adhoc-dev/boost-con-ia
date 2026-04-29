@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Branch"
+  short_description: "Draft ADHOC-style git branch names"
+  default_prompt: "Use $git-branch to draft an ADHOC-style branch name for my current ticket or task."

@@ -1,4 +1,4 @@
-# boost-con-ia
+# Boos con IA
 
 Repositorio para una capacitación de Boost con IA orientada a trabajo asistido con agentes sobre datos de Odoo usando Tuqui MCP.
 

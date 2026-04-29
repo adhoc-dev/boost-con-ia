@@ -52,7 +52,7 @@ Si `adhoc.product` no fuera el nombre técnico exacto del modelo, usar `odoo_sch
 7. Redactar el informe con evidencia concreta.
 8. Proponer 3 specs priorizadas por impacto y factibilidad.
 9. Generar 1 commit por spec, o al menos 1 mensaje de commit por spec si no hay implementación.
-10. Para los commits o mensajes de commit, usar la skill `$git-commit-message` en lugar de definir reglas de formato en este archivo.
+10. Para los commits o mensajes de commit, usar la skill `$git-commit` en lugar de definir reglas de formato en este archivo.
 
 ## Criterios para las 3 specs
 

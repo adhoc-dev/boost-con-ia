@@ -1,9 +1,9 @@
 ---
-name: git-commit-message
+name: git-commit
 description: "Draft ADHOC or Odoo-style git commit subjects from staged or unstaged changes. Use when Codex needs to propose or refine a commit message that follows the pattern `[ADD] module_name: summary`, `[IMP]`, `[REF]`, `[I18N]`, `[FIX]`, or `[DEL]`, especially after inspecting git diff and recent repository history."
 ---
 
-# Git Commit Message
+# Git Commit
 
 ## Overview
 
