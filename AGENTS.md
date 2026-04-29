@@ -89,7 +89,13 @@ Incluir:
 
 ## Cómo agregar Tuqui MCP a Codex
 
-Si Tuqui MCP no está configurado en Codex, agregar una entrada en `~/.codex/config.toml`:
+Si Tuqui MCP no está configurado en Codex, preferir este comando:
+
+```bash
+codex mcp add tuqui --url https://tuqui.ai/mcp/adhoc
+```
+
+Alternativamente, agregar una entrada en `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.tuqui]
@@ -98,10 +104,9 @@ url = "https://tuqui.ai/mcp/adhoc"
 
 Pasos:
 
-1. Abrir `~/.codex/config.toml`.
-2. Agregar el bloque de `mcp_servers.tuqui` si no existe.
-3. Guardar el archivo.
-4. Reiniciar Codex.
-5. Verificar que las herramientas de Tuqui estén disponibles, por ejemplo intentando usar `tuqui_context`.
+1. Ejecutar `codex mcp add tuqui --url https://tuqui.ai/mcp/adhoc`.
+2. Si se usa configuración manual, abrir `~/.codex/config.toml` y agregar el bloque de `mcp_servers.tuqui`.
+3. Reiniciar Codex.
+4. Verificar que las herramientas de Tuqui estén disponibles, por ejemplo intentando usar `tuqui_context`.
 
 Si ya existe una sección `mcp_servers.tuqui`, no duplicarla: revisar o actualizar su `url`.

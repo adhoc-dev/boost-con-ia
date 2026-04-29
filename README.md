@@ -22,7 +22,13 @@ El foco sugerido es:
 
 ## Configurar Tuqui MCP en Codex
 
-Si Tuqui MCP no está configurado localmente, agregar esto en `~/.codex/config.toml`:
+La forma más simple es:
+
+```bash
+codex mcp add tuqui --url https://tuqui.ai/mcp/adhoc
+```
+
+Alternativamente, se puede agregar manualmente en `~/.codex/config.toml`:
 
 ```toml
 [mcp_servers.tuqui]
@@ -35,6 +41,7 @@ Luego reiniciar Codex y verificar que estén disponibles herramientas como `tuqu
 
 - [AGENTS.md](/home/joa/enterprise/boost-con-ia/AGENTS.md): contexto operativo del ejercicio y lineamientos para agentes
 - [`.agents/`](/home/joa/enterprise/boost-con-ia/.agents): skills de proyecto disponibles en el repo
+- [`skills/git-commit-message/`](/home/joa/enterprise/boost-con-ia/skills/git-commit-message): fuente visible de la skill para redactar commits
 
 ## Entregables esperados
 
