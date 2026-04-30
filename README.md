@@ -69,7 +69,7 @@ Completar el formulario con:
 
 - **Name:** `tuqui`
 - Tipo: **Streamable HTTP**
-- **URL:** `https://tuqui.ai/mcp/adhoc`
+- **URL:** `https://tuqui.com/mcp/adhoc`
 
 Dejar el resto en blanco y guardar.
 
@@ -117,7 +117,7 @@ Dentro de Codex, correr `/model` y elegir `gpt-5.5` con effort `medium`.
 El registro del MCP se hace **por fuera de Codex**, desde la terminal:
 
 ```bash
-codex mcp add tuqui --url https://tuqui.ai/mcp/adhoc
+codex mcp add tuqui --url https://tuqui.com/mcp/adhoc
 ```
 
 Esto abre directamente Tuqui en el navegador para autenticarse. Una vez completada la autenticación, se puede cerrar la pestaña y volver a la terminal.
