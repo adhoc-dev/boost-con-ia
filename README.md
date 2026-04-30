@@ -134,7 +134,9 @@ codex mcp login tuqui
 
 ## Enunciado
 
-El flujo simula la colaboración entre PO y devs apoyada por agentes:
+El flujo simula la colaboración entre PO y devs apoyada por agentes. Hay dos variantes según el equipo: **Sistemas** y **Consultoría Técnica (CT)**.
+
+### Sistemas
 
 1. **PO**: analiza los tickets de los últimos 3 meses sobre los productos `adhoc.product` del equipo vía Tuqui MCP, y redacta specs **funcionales** (sin referencias a código) que apunten a reducir la recurrencia de tickets.
 2. **PO**: sube esas specs a una rama y las entrega a los devs (usando Codex + skills).
@@ -142,9 +144,19 @@ El flujo simula la colaboración entre PO y devs apoyada por agentes:
 4. **Devs**: con la spec funcional y el contexto del código, generan una spec **técnica** de implementación.
 5. **Devs**: implementan la spec técnica y abren el PR correspondiente.
 
+### Consultoría Técnica
+
+1. **Dos personas toman el rol de PO**:
+   - Una analiza las **tareas de los últimos 3 meses** del equipo vía Tuqui MCP para identificar mejoras a realizar (análogo al análisis de tickets de Sistemas, pero contra tareas), y redacta specs **funcionales** que apunten a reducir la recurrencia.
+   - La otra identifica una **tarea de desarrollo a futuro** y redacta la spec **funcional** para ese desarrollo.
+2. **POs**: suben esas specs a una rama y las entregan a los devs (usando Codex + skills).
+3. **Devs**: se pasan a la rama y, con la spec funcional, abren el entorno de desarrollo.
+4. **Devs**: con la spec funcional y el contexto del código, generan una spec **técnica** de implementación.
+5. **Devs**: implementan la spec técnica y abren el PR correspondiente.
+
 ### Entregables esperados
 
-- 1 informe breve con evidencia y hallazgos del análisis de tickets
-- 2 specs funcionales priorizadas para bajar recurrencia de tickets
+- 1 informe breve con evidencia y hallazgos del análisis (tickets en Sistemas, tareas en CT)
+- 2 specs funcionales (en CT: una de mejora a partir del análisis y otra de desarrollo a futuro)
 - 2 specs técnicas derivadas de las funcionales
 - uno o más PRs implementando las specs
