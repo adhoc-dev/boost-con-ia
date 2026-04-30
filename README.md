@@ -35,29 +35,31 @@ code .
 
 ---
 
-## Setup para POs (extensión de Codex en VS Code)
+## Setup de Codex
 
-Para POs recomendamos trabajar con la **extensión de Codex en VS Code**.
+Los **POs** usan la extensión de VS Code. Los **devs** pueden usar cualquiera de las dos opciones (extensión o CLI).
 
-### 1. Instalar la extensión
+### Via extensión
+
+#### 1. Instalar la extensión
 
 En VS Code, abrir la pestaña de **Extensions** y buscar `codex`. Instalar la primera, **Codex – OpenAI's coding agent** (publicada por OpenAI).
 
 ![Buscar la extensión Codex en el marketplace](docs/images/01-extension-marketplace.png)
 
-### 2. Iniciar sesión con ChatGPT
+#### 2. Iniciar sesión con ChatGPT
 
 Abrir la extensión y elegir **Sign in with ChatGPT**. El login debe hacerse con la cuenta de ChatGPT compartida por el equipo (`team-*@adhoc.inc`), no con cuentas personales.
 
 ![Sign in with ChatGPT en la extensión](docs/images/02-extension-signin.png)
 
-### 3. Abrir Codex settings
+#### 3. Abrir Codex settings
 
 Desde el ícono de engranaje de la extensión, entrar a **Codex settings**.
 
 ![Acceder a Codex settings](docs/images/03-settings-menu.png)
 
-### 4. Agregar Tuqui como MCP server
+#### 4. Agregar Tuqui como MCP server
 
 En la sección **MCP servers** dentro de Codex settings, hacer clic en **+ Add server**.
 
@@ -73,13 +75,13 @@ Dejar el resto en blanco y guardar.
 
 ![Formulario de MCP con tuqui y Streamable HTTP](docs/images/05-add-mcp-server.png)
 
-### 5. Autenticarse contra Tuqui
+#### 5. Autenticarse contra Tuqui
 
 El server queda listado pero pide autenticación. Hacer clic en **Authenticate**: se abre Tuqui en el navegador para completar el login. Una vez autenticado, se puede cerrar la pestaña.
 
 ![Botón Authenticate en el server tuqui](docs/images/06-mcp-authenticate.png)
 
-### 6. Verificar y configurar el modelo
+#### 6. Verificar y configurar el modelo
 
 De vuelta en el chat de Codex, correr `/mcp` para confirmar que `tuqui` aparece como **Authenticated (OAuth)** y **Enabled**. Desde el selector inferior, elegir el modelo **5.5** con effort **Medium**.
 
@@ -87,13 +89,7 @@ De vuelta en el chat de Codex, correr `/mcp` para confirmar que `tuqui` aparece 
 
 Si en algún momento se cierra la sesión de Tuqui, volver al panel de **MCP servers** y usar **Authenticate** de nuevo.
 
----
-
-## Setup para devs
-
-Los devs pueden usar **cualquiera de las dos opciones**: la extensión de VS Code (mismos pasos que POs, ver sección de arriba) o Codex CLI desde la terminal.
-
-### Opción CLI
+### Via CLI
 
 Si todavía no tenés Codex instalado, bajarlo via curl (no usar npm):
 
