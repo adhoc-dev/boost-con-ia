@@ -8,7 +8,7 @@ El ejercicio consiste en analizar información de Odoo de Adhoc para detectar op
 
 ## Herramientas esperadas
 
-- Codex
+- Codex (extensión de VS Code para POs, CLI para devs)
 - Tuqui MCP
 - Skills de apoyo cuando apliquen, por ejemplo para commits
 
@@ -26,22 +26,76 @@ El ejercicio consiste en analizar información de Odoo de Adhoc para detectar op
   git clone git@github.com:adhoc-dev/boost-con-ia.git
   ```
 
-Luego entrar al directorio y abrir Codex desde ahí:
+Luego entrar al directorio:
 
 ```bash
 cd boost-con-ia
-codex
+code .
 ```
 
-## Codex
+---
 
-Si todavía no tenés Codex instalado:
+## Setup para POs (extensión de Codex en VS Code)
 
-```bash
-npm install -g @openai/codex
-```
+Para POs recomendamos trabajar con la **extensión de Codex en VS Code**.
 
-Alternativamente, se puede instalar Codex sin npm:
+### 1. Instalar la extensión
+
+En VS Code, abrir la pestaña de **Extensions** y buscar `codex`. Instalar la primera, **Codex – OpenAI's coding agent** (publicada por OpenAI).
+
+![Buscar la extensión Codex en el marketplace](docs/images/01-extension-marketplace.png)
+
+### 2. Iniciar sesión con ChatGPT
+
+Abrir la extensión y elegir **Sign in with ChatGPT**. El login debe hacerse con la cuenta de ChatGPT compartida por el equipo (`team-*@adhoc.inc`), no con cuentas personales.
+
+![Sign in with ChatGPT en la extensión](docs/images/02-extension-signin.png)
+
+### 3. Abrir Codex settings
+
+Desde el ícono de engranaje de la extensión, entrar a **Codex settings**.
+
+![Acceder a Codex settings](docs/images/03-settings-menu.png)
+
+### 4. Agregar Tuqui como MCP server
+
+En la sección **MCP servers** dentro de Codex settings, hacer clic en **+ Add server**.
+
+![Panel de MCP servers vacío](docs/images/04-mcp-servers.png)
+
+Completar el formulario con:
+
+- **Name:** `tuqui`
+- Tipo: **Streamable HTTP**
+- **URL:** `https://tuqui.ai/mcp/adhoc`
+
+Dejar el resto en blanco y guardar.
+
+![Formulario de MCP con tuqui y Streamable HTTP](docs/images/05-add-mcp-server.png)
+
+### 5. Autenticarse contra Tuqui
+
+El server queda listado pero pide autenticación. Hacer clic en **Authenticate**: se abre Tuqui en el navegador para completar el login. Una vez autenticado, se puede cerrar la pestaña.
+
+![Botón Authenticate en el server tuqui](docs/images/06-mcp-authenticate.png)
+
+### 6. Verificar y configurar el modelo
+
+De vuelta en el chat de Codex, correr `/mcp` para confirmar que `tuqui` aparece como **Authenticated (OAuth)** y **Enabled**. Desde el selector inferior, elegir el modelo **5.5** con effort **Medium**.
+
+![/mcp con tuqui autenticado y modelo 5.5 Medium](docs/images/07-mcp-verify.png)
+
+Si en algún momento se cierra la sesión de Tuqui, volver al panel de **MCP servers** y usar **Authenticate** de nuevo.
+
+---
+
+## Setup para devs
+
+Los devs pueden usar **cualquiera de las dos opciones**: la extensión de VS Code (mismos pasos que POs, ver sección de arriba) o Codex CLI desde la terminal.
+
+### Opción CLI
+
+Si todavía no tenés Codex instalado, bajarlo via curl (no usar npm):
 
 ```bash
 curl -fL -o codex.tar.gz https://github.com/openai/codex/releases/latest/download/codex-x86_64-unknown-linux-musl.tar.gz
@@ -50,13 +104,19 @@ sudo install -m 0755 codex-x86_64-unknown-linux-musl /usr/local/bin/codex
 rm codex.tar.gz codex-x86_64-unknown-linux-musl
 ```
 
+Levantar Codex desde el repo con:
+
+```bash
+codex
+```
+
 El login debe hacerse con la cuenta de ChatGPT compartida por el equipo (`team-*@adhoc.inc`), no con cuentas personales.
 
-### Configurar el modelo
+#### Configurar el modelo
 
 Dentro de Codex, correr `/model` y elegir `gpt-5.5` con effort `medium`.
 
-### Configurar Tuqui MCP
+#### Configurar Tuqui MCP
 
 El registro del MCP se hace **por fuera de Codex**, desde la terminal:
 
@@ -73,6 +133,8 @@ Si en algún momento se cierra la sesión de Tuqui, volver a autenticar desde la
 ```bash
 codex mcp login tuqui
 ```
+
+---
 
 ## Enunciado
 
